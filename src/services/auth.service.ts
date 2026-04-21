@@ -1,10 +1,10 @@
 import http from 'k6/http';
-import { BASE_URL } from '../config/env.js';
+import { BASE_URL, PASSWORD, PATH, USERNAME, } from '../config/env.js';
 
 export function login(): string {
   const payload = JSON.stringify({
-    email: 'eve.holt@reqres.in',
-    password: 'cityslicka',
+    email: USERNAME,
+    password: PASSWORD,
   });
 
   const params = {
@@ -13,9 +13,9 @@ export function login(): string {
     },
   };
 
-  const res = http.post(`${BASE_URL}/api/login`, payload, params);
+  const res = http.post(`${BASE_URL}/${PATH}`, payload, params);
 
-  // Debug (optional but useful)
+  // Debug (optional)
   console.log(`Login response: ${res.status} - ${res.body}`);
 
   const token = res.json('token');

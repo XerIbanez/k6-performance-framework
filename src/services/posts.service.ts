@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { BASE_URL } from '../config/env.js';
+import { BASE_URL, POST_PATH } from '../config/env.js';
 
 export function getPosts(token: string) {
   const params = {
@@ -9,7 +9,7 @@ export function getPosts(token: string) {
     },
   };
 
-  const res = http.get(`${BASE_URL}/posts`, params);
+  const res = http.get(`${BASE_URL}/${POST_PATH}`, params);
 
   // Debug (optional)
   console.log(`GetPosts response: ${res.status}`);
